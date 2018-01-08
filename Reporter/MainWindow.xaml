@@ -1,0 +1,62 @@
+﻿<Window x:Class="Reporter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Reporter"
+        mc:Ignorable="d"
+        Title="Tohle je hlavní vokno" Height="295" Width="305" VerticalContentAlignment="Stretch" ResizeMode="CanMinimize">
+    <Grid Margin="0,0,3.333,0.333">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Button x:Name="Reportuj" Content="Reportuj Exekuci" Width="110" Height="45" Click="Reportuj_Click" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="25.667,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_Analýzu" Content="Reportuj TA" Width="110" Height="45" Click="Reportuj_Analýzu_Click" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,10,26.333,0" VerticalAlignment="Top" HorizontalAlignment="Right" Padding="0">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_90" Content="Reportuj Exek 90%" Width="110" Height="30" Click="Reportuj_90_Click" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="25.667,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="2">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_90_Analýzu" Content="Reportuj TA 90%" Width="110" Height="30" Click="Reportuj_90_Analýzu_Click" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,70,26.333,0" VerticalAlignment="Top" HorizontalAlignment="Right" Padding="0">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_Done" Content="Reportuj Exek 100%" Width="110" Height="30" Click="Reportuj_Done_Click" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="25.667,115,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="2">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_100_Analýzu" Content="Reportuj TA 100%" Width="110" Height="30" Click="Reportuj_100_Analýzu_Click" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,115,26.333,0" VerticalAlignment="Top" HorizontalAlignment="Right" Padding="0">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_Přípravu" Content="Reportuj Pripravu" Width="110" Height="30" Click="Reportuj_Pripravu_Click" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="25.667,160,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="2">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_Pripravu_Analýzu" Content="Reportuj TA Přípr." Width="110" Height="30" Click="Reportuj_Pripravu_Analýzu_Click" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,160,26.333,0" VerticalAlignment="Top" HorizontalAlignment="Right" Padding="0">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Label Content="©2017" Grid.Column="0" HorizontalAlignment="Left" Height="26" Margin="3,0" Width="100" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" />
+        <Label Content="ver 3.1&#xA;" Grid.Column="1" HorizontalAlignment="Right" Height="26" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="74" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Right" />
+        <ProgressBar x:Name="PB1" Grid.ColumnSpan="2" Height="20" Margin="26,205,26,0" VerticalAlignment="Top" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Opacity="0.8" HorizontalContentAlignment="Center" Padding="0">
+            <ProgressBar.Effect>
+                <DropShadowEffect Opacity="0.3" />
+            </ProgressBar.Effect>
+        </ProgressBar>
+    </Grid>
+</Window>
