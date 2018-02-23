@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Reporter"
         mc:Ignorable="d"
-        Title="Tohle je hlavní vokno" Height="295" Width="305" VerticalContentAlignment="Stretch" ResizeMode="CanMinimize">
+        Title="Tohle je hlavní vokno" Height="335" Width="305" VerticalContentAlignment="Stretch" ResizeMode="CanMinimize">
     <Grid Margin="0,0,3.333,0.333">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -51,9 +51,19 @@
                 <DropShadowEffect Opacity="0.8" />
             </Button.Effect>
         </Button>
-        <Label Content="©2017" Grid.Column="0" HorizontalAlignment="Left" Height="26" Margin="3,0" Width="100" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" />
-        <Label Content="ver 3.1&#xA;" Grid.Column="1" HorizontalAlignment="Right" Height="26" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="74" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Right" />
-        <ProgressBar x:Name="PB1" Grid.ColumnSpan="2" Height="20" Margin="26,205,26,0" VerticalAlignment="Top" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Opacity="0.8" HorizontalContentAlignment="Center" Padding="0">
+        <Button x:Name="Reportuj_All" Content="Reportuj All" Width="110" Height="30" Click="Reportuj_All_Click" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="25.667,205,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="2">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Reportuj_All_Analýzu" Content="Reportuj TA All" Width="110" Height="30" Click="Reportuj_All_Analýzu_Click" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,205,26.333,0" VerticalAlignment="Top" HorizontalAlignment="Right" Padding="0">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.8" />
+            </Button.Effect>
+        </Button>
+        <Label Content="©2017-2018" Grid.Column="0" HorizontalAlignment="Left" Height="26" Margin="3,0" Width="100" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" />
+        <Label Content="ver 3.2&#xA;" Grid.Column="1" HorizontalAlignment="Right" Height="26" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="74" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Right" />
+        <ProgressBar x:Name="PB1" Grid.ColumnSpan="2" Height="20" Margin="26,250,26,0" VerticalAlignment="Top" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Opacity="0.8" HorizontalContentAlignment="Center" Padding="0">
             <ProgressBar.Effect>
                 <DropShadowEffect Opacity="0.3" />
             </ProgressBar.Effect>

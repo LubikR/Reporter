@@ -21,7 +21,7 @@ namespace Reporter
         private BackgroundWorker workerAnalyza = new BackgroundWorker();
 
         // jaky adresar v HPQC jedu
-        private int rootID = 0;
+        private String rootID = null;
 
         public MainWindow()
         {
@@ -39,28 +39,28 @@ namespace Reporter
         private void Reportuj_Click(object sender, RoutedEventArgs e)
         {
             //jedu aktivni veze, tj. rootID = 536
-            rootID = 536;
+            rootID = "536";
             worker.RunWorkerAsync();
         }
 
         private void Reportuj_90_Click(object sender, RoutedEventArgs e)
         {
             //jedu 90pct veze, tj. rootID = 1592
-            rootID = 1592;
+            rootID = "1592";
             worker.RunWorkerAsync();
         }
 
         private void Reportuj_Done_Click(object sender, RoutedEventArgs e)
         {
             //jedu 100pct veze, tj. rootID = 1593
-            rootID = 1593;
+            rootID = "1593";
             worker.RunWorkerAsync();
         }
 
         private void Reportuj_Pripravu_Click(object sender, RoutedEventArgs e)
         {
             //jedu veze v Piprave, tj. rootID = 1596
-            rootID = 589;
+            rootID = "589";
             worker.RunWorkerAsync();
         }
 
@@ -76,17 +76,21 @@ namespace Reporter
             var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string path = null;
 
-            if (rootID == 536)
+            if (rootID == "536")
             {
                 path = Path.Combine(desktopFolder, "Report_Exekuce.xlsx");
             }
-            else if (rootID == 1592)
+            else if (rootID == "1592")
             {
                 path = Path.Combine(desktopFolder, "Report_Exekuce_90.xlsx");
             }
-            else if (rootID == 1593)
+            else if (rootID == "1593")
             {
                 path = Path.Combine(desktopFolder, "Report_Exekuce_Done.xlsx");
+            }
+            else if (rootID == "99999")
+            {
+                path = Path.Combine(desktopFolder, "Report_Exekuce_All.xlsx");
             }
             else
             {
@@ -133,10 +137,19 @@ namespace Reporter
             conn.Open();
             OracleCommand cmd = conn.CreateCommand();
 
+            //doplneni RootID pro All
+            if (rootID == "99999")
+            {
+                rootID = "IN ('536', '1592', '1593', '589')";
+            } else
+            {
+                rootID = "= " + rootID;
+            }
+
             worker.ReportProgress(20);
             cmd.CommandText = "select prior rq_req_name as req, rq_req_name, rq_req_status, rq_req_id, " +
                 "rq_father_id from RELEASE_SOC_DB.REQ req where req.rq_no_of_sons = 0 " +
-                "start with req.RQ_FATHER_ID = " + rootID + " connect by prior rq_req_id = rq_father_id";
+                "start with req.RQ_FATHER_ID " + rootID + " connect by prior rq_req_id = rq_father_id";
             cmd.CommandType = System.Data.CommandType.Text;
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -159,7 +172,7 @@ namespace Reporter
             //Naplnění počtu synů kazdeho father reqs
             cmd.CommandText = "select req, count(*) num from(select prior rq_req_name req, rq_req_name, rq_req_status," +
                 " rq_req_id, rq_father_id from RELEASE_SOC_DB.REQ req where req.rq_no_of_sons = 0 " +
-                "start with req.RQ_FATHER_ID = " + rootID + " connect by prior rq_req_id = rq_father_id) group by req";
+                "start with req.RQ_FATHER_ID " + rootID + " connect by prior rq_req_id = rq_father_id) group by req";
             cmd.CommandType = System.Data.CommandType.Text;
             OracleDataReader reader2 = cmd.ExecuteReader();
 
@@ -332,7 +345,7 @@ namespace Reporter
 
             //musim projit vsechny REQ a pro jejich FATHER dohledat TE MD a Date
             cmd.CommandText = "select rq_req_name, rq_user_17 as MD, rq_user_16 as term, rq_user_15 as reviewDate " +
-                "from RELEASE_SOC_DB.REQ req where rq_father_id = " + rootID + " and rq_req_status<> 'Passed'";
+                "from RELEASE_SOC_DB.REQ req where rq_father_id " + rootID + " and rq_req_status<> 'Passed'";
             cmd.CommandType = System.Data.CommandType.Text;
             OracleDataReader reader5 = cmd.ExecuteReader();
 
@@ -439,28 +452,28 @@ namespace Reporter
         private void Reportuj_Analýzu_Click(object sender, RoutedEventArgs e)
         {
             //jedu aktivni veze, tj. rootID = 536
-            rootID = 536;
+            rootID = "536";
             workerAnalyza.RunWorkerAsync();
         }
 
         private void Reportuj_90_Analýzu_Click(object sender, RoutedEventArgs e)
         {
             //jedu 90pct veze, tj. rootID = 1592
-            rootID = 1592;
+            rootID = "1592";
             workerAnalyza.RunWorkerAsync();
         }
 
         private void Reportuj_Pripravu_Analýzu_Click(object sender, RoutedEventArgs e)
         {
             //jedu veze Pripravy, tj. rootID = 1596
-            rootID = 589;
+            rootID = "589";
             workerAnalyza.RunWorkerAsync();
         }
 
         private void Reportuj_100_Analýzu_Click(object sender, RoutedEventArgs e)
         {
             //jedu 100pct veze, tj. rootID = 1593
-            rootID = 1593;
+            rootID = "1593";
             workerAnalyza.RunWorkerAsync();
         }
 
@@ -474,15 +487,15 @@ namespace Reporter
             var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             string path = null;
-            if (rootID == 536)
+            if (rootID == "536")
             {
                 path = Path.Combine(desktopFolder, "Report_Analýza.xlsx");
             }
-            else if (rootID == 1592)
+            else if (rootID == "1592")
             {
                 path = Path.Combine(desktopFolder, "Report_Analýza_90.xlsx");
             }
-            else if (rootID == 1593)
+            else if (rootID == "1593")
             {
                 path = Path.Combine(desktopFolder, "Report_Analýza_Done.xlsx");
             }
@@ -602,6 +615,20 @@ namespace Reporter
         private void Worker_Progress(object sender, ProgressChangedEventArgs e)
         {
             PB1.Value = e.ProgressPercentage;
+        }
+
+        private void Reportuj_All_Analýzu_Click(object sender, RoutedEventArgs e)
+        {
+            //jedu veze Pripravy, tj. rootID = 
+            rootID = "99999";
+            workerAnalyza.RunWorkerAsync();
+        }
+
+        private void Reportuj_All_Click(object sender, RoutedEventArgs e)
+        {
+            //jedu veze Pripravy, tj. rootID = 
+            rootID = "99999";
+            worker.RunWorkerAsync();
         }
     }
 }
