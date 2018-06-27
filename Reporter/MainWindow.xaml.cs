@@ -98,14 +98,17 @@ namespace Reporter
             }
 
             FileInfo excelFile = new FileInfo(path);
-            if (excelFile.Exists)
-            {
-                excel = new ExcelPackage(excelFile);
-            }
-            else
-            {
-                excel = new ExcelPackage();
-            }
+            
+
+                if (excelFile.Exists)
+                {
+                    excel = new ExcelPackage(excelFile);
+                }
+                else
+                {
+                    excel = new ExcelPackage();
+                }
+           
 
             String sheet = DateTime.Now.ToString("dd.MM._HH-mm");
             excel.Workbook.Worksheets.Add(sheet);
@@ -158,12 +161,22 @@ namespace Reporter
             while (reader.Read())
             {
                 Requirement req = new Requirement();
+                try
+                {
+                    req.Req_name_father = (string)reader["req"];
+                    req.Req_name = (string)reader["rq_req_name"];
+                    req.Req_status = (string)reader["rq_req_status"];
+                    req.Req_id = reader.GetInt16(3);
+                    req.Req_father_id = reader.GetInt16(4);
+                }
+                catch (Exception error)
+                {
+                    String text = "Req_father " + reader["req"] + ". Req: " + reader["rq_req_name"] + "   " + error.ToString();
+                    MessageBox.Show(text);
+                    break;
+                }
 
-                req.Req_name_father = (string)reader["req"];
-                req.Req_name = (string)reader["rq_req_name"];
-                req.Req_status = (string)reader["rq_req_status"];
-                req.Req_id = reader.GetInt16(3);
-                req.Req_father_id = reader.GetInt16(4);
+
 
                 reqs.Add(req);
             }
