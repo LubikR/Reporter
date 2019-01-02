@@ -1,0 +1,5 @@
+﻿<connectionStrings>
+  <add name="HPQC"
+   providerName="System.Data.OracleClient"
+   connectionString="Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=aaa.bbb.ccc.ddd)(PORT=xxxx))(CONNECT_DATA=(SERVICE_NAME=yyyyyyy)));User Id=user;Password=pass;" />
+</connectionStrings>
